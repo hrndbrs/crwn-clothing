@@ -13,12 +13,14 @@
     "@apollo/experimental-nextjs-app-support": "^0.6.0",
     "@apollo/server": "^4.10.0",
     "@as-integrations/next": "^3.0.0",
+    "axios": "^1.6.5",
     "firebase": "^10.7.1",
     "graphql": "^16.8.1",
     "next": "14.0.4",
     "react": "^18",
     "react-dom": "^18",
-    "sass": "^1.69.7"
+    "sass": "^1.69.7",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@types/node": "^20",

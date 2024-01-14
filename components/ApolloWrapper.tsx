@@ -10,7 +10,7 @@ import {
 
 function makeClient() {
 	const httpLink = new HttpLink({
-		uri: process.env.SERVER_URI,
+		uri: process.env.SERVER_URI + "/graphql",
 		fetchOptions: { cache: "no-store" },
 	});
 
