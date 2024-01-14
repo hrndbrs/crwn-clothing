@@ -1,4 +1,4 @@
-import { userSignUp } from "@/app/sign-in/action";
+import { userSignUp } from "@/app/auth/action";
 import FormInput from "../FormInput/FormInput";
 import Button from "../Button/Button";
 import "./sign-up-form.styles.scss";

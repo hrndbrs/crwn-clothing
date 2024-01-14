@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { Open_Sans } from "next/font/google";
+import { Roboto_Condensed } from "next/font/google";
 import ApolloWrapper from "@/components/ApolloWrapper";
 import Navigation from "@/components/Navigation/Navigation";
 import "./index.scss";
 
-const openSans = Open_Sans({ subsets: ["latin"] });
+const robotoCondensed = Roboto_Condensed({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
 	title: "Crown Clothing",
@@ -19,7 +19,7 @@ export default function RootLayout({
 	return (
 		<ApolloWrapper>
 			<html lang="en">
-				<body className={openSans.className}>
+				<body className={robotoCondensed.className}>
 					<Navigation />
 					{children}
 				</body>
