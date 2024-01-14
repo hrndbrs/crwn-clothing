@@ -5,6 +5,9 @@ import {
 	signInWithPopup,
 	signInWithEmailAndPassword,
 	createUserWithEmailAndPassword,
+	signOut,
+	onAuthStateChanged,
+	NextOrObserver,
 	User,
 } from "firebase/auth";
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
@@ -19,6 +22,7 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+const db = getFirestore();
 
 const googleProvider = new GoogleAuthProvider();
 
@@ -27,7 +31,8 @@ googleProvider.setCustomParameters({
 });
 
 export const auth = getAuth();
-export const db = getFirestore();
+
+export const signOutUser = () => signOut(auth);
 
 export const signInWithGooglePopup = () =>
 	signInWithPopup(auth, googleProvider);
@@ -38,9 +43,12 @@ export const emailSignIn = (email: string, password: string) =>
 export const signUpWithEmailAndPassword = (email: string, password: string) =>
 	createUserWithEmailAndPassword(auth, email, password);
 
+export const onAuthStateChangedListener = (cb: NextOrObserver<User>) =>
+	onAuthStateChanged(auth, cb);
+
 export async function createUserDocument(
 	userAuth: User,
-	additionalInformation = {}
+	additionals: { [k: string]: string } = {}
 ) {
 	const userDocRef = doc(db, "users", userAuth.uid);
 	const userSnapshot = await getDoc(userDocRef);
@@ -49,16 +57,18 @@ export async function createUserDocument(
 		const { email, displayName } = userAuth;
 		const createdAt = new Date();
 
-		const payload = { displayName, email, createdAt, ...additionalInformation };
+		const payload = { displayName, email, createdAt, ...additionals };
 
 		try {
 			await setDoc(userDocRef, payload);
-		} catch (err) {
-			console.error(err);
+			return { user: userDocRef, created: true };
+		} catch (error) {
+			console.error(error);
+			return { error, created: false };
 		}
 	}
 
-	return userDocRef;
+	return { user: userDocRef, created: false };
 }
 
-export { FirebaseError } from "firebase/app";
+export type AuthStateChangeListener = typeof onAuthStateChangedListener;

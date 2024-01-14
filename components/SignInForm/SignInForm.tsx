@@ -1,16 +1,27 @@
 import FormInput from "../FormInput/FormInput";
 import Button, { BUTTON_TYPE_CLASS } from "../Button/Button";
-import { signInWithGooglePopup } from "@/config/firebase";
-import { googleSignIn, signInWithEmailAndPassword } from "@/app/auth/action";
+import { signInWithGooglePopup, emailSignIn } from "@/config/firebase";
+import { addUserToDb } from "@/app/auth/actions";
 import "./sign-in-form.styles.scss";
+import { userSignInSchema } from "@/utils/schema";
 
 async function logGoogleUser() {
 	try {
 		const credential = await signInWithGooglePopup();
-		const authToken = await credential.user.getIdToken();
-		await googleSignIn(JSON.parse(JSON.stringify(credential)), authToken);
-	} catch (err) {
-		console.log(err);
+		await addUserToDb(JSON.parse(JSON.stringify(credential)));
+	} catch (error) {
+		console.log(error);
+	}
+}
+
+export async function signInWithEmailAndPassword(formData: FormData) {
+	const form = Object.fromEntries(formData.entries());
+	try {
+		const { email, password } = userSignInSchema.parse(form);
+		const credential = await emailSignIn(email, password);
+		await addUserToDb(JSON.parse(JSON.stringify(credential)));
+	} catch (error) {
+		console.log(error);
 	}
 }
 

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Roboto_Condensed } from "next/font/google";
-import ApolloWrapper from "@/components/ApolloWrapper";
 import Navigation from "@/components/Navigation/Navigation";
 import "./index.scss";
 
@@ -17,13 +16,11 @@ export default function RootLayout({
 	children: React.ReactNode;
 }) {
 	return (
-		<ApolloWrapper>
-			<html lang="en">
-				<body className={robotoCondensed.className}>
-					<Navigation />
-					{children}
-				</body>
-			</html>
-		</ApolloWrapper>
+		<html lang="en">
+			<body className={robotoCondensed.className}>
+				<Navigation />
+				{children}
+			</body>
+		</html>
 	);
 }

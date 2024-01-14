@@ -1,7 +1,24 @@
-import { userSignUp } from "@/app/auth/action";
 import FormInput from "../FormInput/FormInput";
 import Button from "../Button/Button";
 import "./sign-up-form.styles.scss";
+import { userSignUpSchema } from "@/utils/schema";
+import { addUserToDb } from "@/app/auth/actions";
+import { signUpWithEmailAndPassword } from "@/config/firebase";
+
+export async function userSignUp(formData: FormData) {
+	const form = Object.fromEntries(formData.entries());
+
+	try {
+		if (form.password !== form.confirmPassword) return;
+
+		const { displayName, email, password } = userSignUpSchema.parse(form);
+		const additionals = { displayName };
+		const credential = await signUpWithEmailAndPassword(email, password);
+		await addUserToDb(JSON.parse(JSON.stringify(credential)), additionals);
+	} catch (error) {
+		console.log(error);
+	}
+}
 
 function SignUpForm() {
 	return (
