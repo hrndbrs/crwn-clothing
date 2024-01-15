@@ -19,12 +19,12 @@ export async function POST(req: NextRequest) {
 
 		if (created)
 			return NextResponse.json(
-				{ message: "created user successfully", user },
+				{ message: "created user successfully", content: { user } },
 				{ status: 201 }
 			);
 
 		return NextResponse.json(
-			{ message: "user already exists", user },
+			{ message: "user already exists", content: { user } },
 			{ status: 200 }
 		);
 	} catch (err) {

@@ -1,5 +1,5 @@
-import FormInput from "../FormInput/FormInput";
-import Button, { BUTTON_TYPE_CLASS } from "../Button/Button";
+import FormInput from "../FormInput";
+import Button, { BUTTON_TYPE_CLASS } from "../Button";
 import { signInWithGooglePopup, emailSignIn } from "@/config/firebase";
 import { addUserToDb } from "@/app/auth/actions";
 import "./sign-in-form.styles.scss";

@@ -2,9 +2,12 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import useAuthGuard from "@/hooks/useAuthGuard";
+import { useAuthStore } from "@/stores/auth";
+import { useCartStore } from "@/stores/cart";
 import CrwnLogo from "@/public/icons/crown.svg";
-import { onAuthStateChangedListener, signOutUser } from "@/config/firebase";
+import { signOutUser } from "@/config/firebase";
+import CartIcon from "../CartIcon";
+import CartDropdown from "../CartDropdown";
 import "./navigation.styles.scss";
 
 async function userSignOut() {
@@ -12,7 +15,8 @@ async function userSignOut() {
 }
 
 function Navigation() {
-	const currentUser = useAuthGuard(onAuthStateChangedListener);
+	const currentUser = useAuthStore((state) => state.currentUser);
+	const isCartOpen = useCartStore((state) => state.isOpen);
 
 	return (
 		<div className="navigation">
@@ -32,7 +36,9 @@ function Navigation() {
 						SIGN IN
 					</Link>
 				)}
+				<CartIcon />
 			</div>
+			{isCartOpen && <CartDropdown />}
 		</div>
 	);
 }

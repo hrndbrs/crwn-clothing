@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Roboto_Condensed } from "next/font/google";
-import Navigation from "@/components/Navigation/Navigation";
+import AuthWrapper from "@/components/AuthWrapper";
+import Navigation from "@/components/Navigation";
 import "./index.scss";
 
 const robotoCondensed = Roboto_Condensed({ subsets: ["latin"] });
@@ -18,8 +19,10 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body className={robotoCondensed.className}>
-				<Navigation />
-				{children}
+				<AuthWrapper>
+					<Navigation />
+					{children}
+				</AuthWrapper>
 			</body>
 		</html>
 	);

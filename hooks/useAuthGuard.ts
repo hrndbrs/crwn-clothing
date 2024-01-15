@@ -17,6 +17,4 @@ export default function useAuthGuard(callback: AuthStateChangeListener) {
 
 		return unsubscribe;
 	}, []);
-
-	return currentUser;
 }

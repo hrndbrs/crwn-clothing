@@ -1,5 +1,5 @@
-import FormInput from "../FormInput/FormInput";
-import Button from "../Button/Button";
+import FormInput from "../FormInput";
+import Button from "../Button";
 import "./sign-up-form.styles.scss";
 import { userSignUpSchema } from "@/utils/schema";
 import { addUserToDb } from "@/app/auth/actions";

@@ -14,9 +14,11 @@ function CategoryItem({ category }: { category: Category }) {
 				src={category.imageUrl}
 				alt={category.title}
 				className="background-image"
+				fill
+				style={{ objectFit: "cover" }}
 			/>
 			<div className="category-body-container">
-				<h2>{category.title}</h2>
+				<h2>{category.title.toUpperCase()}</h2>
 				<p>Shop Now</p>
 			</div>
 		</div>

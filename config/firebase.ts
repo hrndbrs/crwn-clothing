@@ -1,3 +1,4 @@
+import mapDocToModel from "@/utils/helpers/mapDocToModel";
 import { initializeApp } from "firebase/app";
 import {
 	getAuth,
@@ -10,7 +11,21 @@ import {
 	NextOrObserver,
 	User,
 } from "firebase/auth";
-import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
+import {
+	getFirestore,
+	doc,
+	getDoc,
+	setDoc,
+	collection,
+	getDocs,
+	query,
+	// where,
+	// WhereFilterOp,
+	// FieldPath,
+	// QueryFieldFilterConstraint,
+	// CollectionReference,
+	// DocumentData,
+} from "firebase/firestore";
 
 const firebaseConfig = {
 	apiKey: "AIzaSyCvHByOXIEbom_ueAi5u7CMLrvcooOzslM",
@@ -45,6 +60,15 @@ export const signUpWithEmailAndPassword = (email: string, password: string) =>
 
 export const onAuthStateChangedListener = (cb: NextOrObserver<User>) =>
 	onAuthStateChanged(auth, cb);
+
+export async function getCollection(collectionName: string) {
+	const collectionRef = collection(db, collectionName);
+	const { docs } = await getDocs(collectionRef);
+
+	const model = docs.map(mapDocToModel);
+
+	return model;
+}
 
 export async function createUserDocument(
 	userAuth: User,

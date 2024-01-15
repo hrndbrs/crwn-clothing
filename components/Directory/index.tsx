@@ -1,4 +1,4 @@
-import CategoryItem, { type Category } from "../CategoryItem/CategoryItem";
+import CategoryItem, { type Category } from "../CategoryItem";
 import "./directory.styles.scss";
 
 function Directory({ categories }: { categories: Category[] }) {
