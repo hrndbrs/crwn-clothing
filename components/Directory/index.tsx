@@ -1,11 +1,14 @@
-import CategoryItem, { type Category } from "../CategoryItem";
+import { getAllCategories } from "@/app/actions";
+import DirectoryItem from "../DirectoryItem";
 import "./directory.styles.scss";
 
-function Directory({ categories }: { categories: Category[] }) {
+async function Directory() {
+	const categories = await getAllCategories();
+
 	return (
 		<div className="directory-container">
 			{categories.map((category) => (
-				<CategoryItem key={category.id} category={category} />
+				<DirectoryItem key={category.id} category={category} />
 			))}
 		</div>
 	);

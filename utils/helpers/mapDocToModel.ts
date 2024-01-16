@@ -1,12 +1,10 @@
-import { DocumentData, QueryDocumentSnapshot } from "firebase/firestore";
+import { DocumentData } from "firebase/firestore";
 
 export interface DocumentModel extends DocumentData {
 	id: string;
 }
 
-export default function mapDocToModel(
-	doc: QueryDocumentSnapshot<DocumentData, DocumentData>
-): DocumentModel {
+export default function mapDocToModel(doc: DocumentData): DocumentModel {
 	return {
 		id: doc.id,
 		...doc.data(),

@@ -1,12 +1,8 @@
 import { create } from "zustand";
 import { User } from "firebase/auth";
+import { AuthStore } from "@/utils/types";
 
-type AuthStore = {
-	currentUser: User | null;
-	setCurrentUser: (payload: User | null) => void;
-};
-
-export const useAuthStore = create<AuthStore>((set) => ({
+export const useAuthStore = create<AuthStore<User>>((set) => ({
 	currentUser: null,
 	setCurrentUser: (payload) => set({ currentUser: payload }),
 }));

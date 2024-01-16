@@ -1,15 +1,20 @@
+"use client";
 import Image from "next/image";
 import { useCartStore } from "@/stores/cart";
-import ShoppingIcon from "@/public/icons/shopping-bag.svg";
+import CartSVG from "@/public/icons/shopping-bag.svg";
 import "./cart-icon.styles.scss";
 
 function CartIcon() {
-	const toggleIsOpen = useCartStore((state) => state.setIsOpen);
+	const { setIsOpen: toggleIsOpen, cartItems } = useCartStore(
+		({ setIsOpen, cartItems }) => ({ setIsOpen, cartItems })
+	);
+
+	const count = cartItems.reduce((prev, curr) => prev + curr.quantity, 0);
 
 	return (
 		<div className="cart-icon-container" onClick={toggleIsOpen}>
-			<Image className="shopping-icon" src={ShoppingIcon} alt="cart-icon" />
-			<span className="item-count">0</span>
+			<Image className="shopping-icon" src={CartSVG} alt="cart-icon" />
+			<span className="item-count">{count}</span>
 		</div>
 	);
 }

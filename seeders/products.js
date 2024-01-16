@@ -1,10 +1,12 @@
-const { createData } = require("./firestore");
+const { nanoid } = require("nanoid")
+const { addCollectionAndDocuments } = require("./firestore");
+const shop = require("./shop.js")
 
-let shop = require("./shop-data.json")
-
-shop.forEach((x) => {
-  delete x.id;
+shop.forEach(async (category) => {
+  category.id = category.title.toLowerCase()
+  category.items.forEach(item => {
+    item.id = nanoid(20)
+  })
 });
 
-createData("products", shop)
-
+addCollectionAndDocuments("products", shop)

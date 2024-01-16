@@ -1,11 +1,11 @@
-import { getAllCategories } from "./actions";
 import Directory from "@/components/Directory";
 
-export default async function Home() {
-	const categories = await getAllCategories();
+function Home() {
 	return (
 		<div>
-			<Directory categories={categories} />
+			<Directory />
 		</div>
 	);
 }
+
+export default Home;

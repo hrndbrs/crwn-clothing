@@ -1,14 +1,14 @@
 import { getProducts } from "./actions";
-import ProductCard from "@/components/ProductCard";
-import "./shop.styles.scss";
+import CategoryPreview from "@/components/CategoryPreview";
 
 async function Shop() {
-	const products = await getProducts();
+	const productsByCategory = await getProducts();
 	return (
-		<div className="products-container">
-			{products.map((product) => (
-				<ProductCard product={product} />
-			))}
+		<div className="category-preview-container">
+			{productsByCategory.map((category) => {
+				const { title, items } = category;
+				return <CategoryPreview key={title} title={title} products={items} />;
+			})}
 		</div>
 	);
 }

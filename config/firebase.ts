@@ -18,13 +18,6 @@ import {
 	setDoc,
 	collection,
 	getDocs,
-	query,
-	// where,
-	// WhereFilterOp,
-	// FieldPath,
-	// QueryFieldFilterConstraint,
-	// CollectionReference,
-	// DocumentData,
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -61,7 +54,15 @@ export const signUpWithEmailAndPassword = (email: string, password: string) =>
 export const onAuthStateChangedListener = (cb: NextOrObserver<User>) =>
 	onAuthStateChanged(auth, cb);
 
-export async function getCollection(collectionName: string) {
+export async function getCollection(collectionName: string, id?: string) {
+	if (id) {
+		const docRef = doc(db, collectionName, id);
+		const snapshot = await getDoc(docRef);
+
+		const model = mapDocToModel(snapshot);
+
+		return model;
+	}
 	const collectionRef = collection(db, collectionName);
 	const { docs } = await getDocs(collectionRef);
 

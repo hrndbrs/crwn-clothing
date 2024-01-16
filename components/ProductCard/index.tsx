@@ -1,14 +1,8 @@
 import Image from "next/image";
-import Button, { BUTTON_TYPE_CLASS } from "../Button";
 import prependCurrency from "@/utils/helpers/prependCurrency";
+import { Product } from "@/utils/types";
+import CardButton from "./CardButton";
 import "./product-card.styles.scss";
-
-export type Product = {
-	id: string | number;
-	name: string;
-	price: number;
-	imageUrl: string;
-};
 
 function ProductCard({ product }: { product: Product }) {
 	const { name, price, imageUrl } = product;
@@ -22,7 +16,7 @@ function ProductCard({ product }: { product: Product }) {
 				<span className="name">{name}</span>
 				<span className="price">{prependCurrency(price)}</span>
 			</div>
-			<Button buttonType={BUTTON_TYPE_CLASS.INVERTED}>Add to cart</Button>
+			<CardButton product={product} />
 		</div>
 	);
 }

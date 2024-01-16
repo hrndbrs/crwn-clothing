@@ -1,5 +1,11 @@
 const { initializeApp } = require("firebase/app")
-const { getFirestore, doc, getDoc, setDoc } = require("firebase/firestore")
+const {
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc,
+  writeBatch
+} = require("firebase/firestore")
 const { nanoid } = require("nanoid")
 
 const firebaseConfig = {
@@ -11,19 +17,28 @@ const firebaseConfig = {
   appId: "1:764401332086:web:91475cc24dd64ad57dd457",
 };
 
-const app = initializeApp(firebaseConfig);
+initializeApp(firebaseConfig);
 const db = getFirestore();
 
-async function createData(dbName, data) {
-  await data.forEach(async (x) => {
-    const ref = doc(db, dbName, nanoid(20))
-    await setDoc(ref, x)
-    const snapshot = await getDoc(ref)
-    console.log(snapshot.data())
-  })
+async function addCollectionAndDocuments(collectionKey, data) {
+  const batch = writeBatch(db)
 
+  for (const item of data) {
+    let id
+
+    if (item.id) {
+      id = item.id
+      delete item.id
+    } else id = nanoid(20)
+
+    const ref = doc(db, collectionKey, id)
+    batch.set(ref, item)
+  }
+
+  await batch.commit()
+  console.log("done")
 }
 
 module.exports = {
-  createData
+  addCollectionAndDocuments
 }
