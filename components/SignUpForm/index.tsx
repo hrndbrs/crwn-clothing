@@ -1,3 +1,5 @@
+"use client";
+
 import FormInput from "../FormInput";
 import Button from "../Button";
 import "./sign-up-form.styles.scss";

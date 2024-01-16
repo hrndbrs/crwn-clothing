@@ -38,17 +38,5 @@ export const useCartStore = create<CartStore>((set) => ({
 					cartItems.splice(itemIndex, 1);
 			}
 			return { cartItems };
-
-			// switch (all) {
-			// 	case false:
-			// 		if (!cartItem) return { cartItems };
-			// 		if (cartItem.quantity > 1) {
-			// 			cartItem.quantity--;
-			// 			return { cartItems };
-			// 		}
-			// 	case true:
-			// 		cartItems.splice(itemIndex, 1);
-			// 		return { cartItems };
-			// }
 		}),
 }));

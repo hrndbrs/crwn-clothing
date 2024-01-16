@@ -1,3 +1,5 @@
+"use client";
+
 import FormInput from "../FormInput";
 import Button, { BUTTON_TYPE_CLASS } from "../Button";
 import { signInWithGooglePopup, emailSignIn } from "@/config/firebase";
