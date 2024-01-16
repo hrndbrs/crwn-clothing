@@ -7,7 +7,7 @@ function CardButton({ product }: { product: Product }) {
 	const addItemToCart = useCartStore((state) => state.addItemToCart);
 
 	function addItem() {
-		addItemToCart(product);
+		addItemToCart!(product);
 	}
 
 	return (

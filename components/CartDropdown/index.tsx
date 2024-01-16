@@ -1,4 +1,5 @@
 "use client";
+import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useCartStore } from "@/stores/cart";
 import CartItem from "../CartItem";
@@ -12,6 +13,10 @@ function CartDropdown() {
 	function navigateToCheckout() {
 		router.push("/checkout");
 	}
+
+	useEffect(() => {
+		useCartStore.persist.rehydrate();
+	}, []);
 
 	return (
 		<div className="cart-dropdown-container">

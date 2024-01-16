@@ -8,11 +8,11 @@ export type Product = {
 export type CartItem = Product & { quantity: number };
 
 export type CartStore = {
-	isOpen: boolean;
+	isOpen?: boolean;
 	cartItems: CartItem[];
-	setIsOpen: () => void;
-	addItemToCart: (product: Product) => void;
-	removeItemFromCart: (id: string, all?: boolean) => void;
+	setIsOpen?: () => void;
+	addItemToCart?: (product: Product) => void;
+	removeItemFromCart?: (id: string, all?: boolean) => void;
 };
 
 export type AuthStore<T> = {

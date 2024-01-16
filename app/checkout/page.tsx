@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { useCartStore } from "@/stores/cart";
 import CheckoutItem from "@/components/CheckoutItem";
 import prependCurrency from "@/utils/helpers/prependCurrency";
@@ -14,6 +15,10 @@ function Checkout() {
 		(prev, curr) => prev + curr.quantity * curr.price,
 		0
 	);
+
+	useEffect(() => {
+		useCartStore.persist.rehydrate();
+	}, []);
 
 	return (
 		<div className="checkout-container">

@@ -1,4 +1,6 @@
 "use client";
+
+import { useEffect } from "react";
 import Image from "next/image";
 import { useCartStore } from "@/stores/cart";
 import CartSVG from "@/public/icons/shopping-bag.svg";
@@ -10,6 +12,10 @@ function CartIcon() {
 	);
 
 	const count = cartItems.reduce((prev, curr) => prev + curr.quantity, 0);
+
+	useEffect(() => {
+		useCartStore.persist.rehydrate();
+	}, []);
 
 	return (
 		<div className="cart-icon-container" onClick={toggleIsOpen}>
