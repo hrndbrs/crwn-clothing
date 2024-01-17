@@ -27,8 +27,7 @@ export async function POST(req: NextRequest) {
 			{ message: "user already exists", content: { user } },
 			{ status: 200 }
 		);
-	} catch (err) {
-		console.log(err, 7);
-		return NextResponse.json({ message: "error" }, { status: 500 });
+	} catch (error) {
+		return NextResponse.json({ message: "error", error }, { status: 500 });
 	}
 }

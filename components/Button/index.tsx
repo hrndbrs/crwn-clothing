@@ -1,4 +1,8 @@
+"use client";
+
+import { useFormStatus } from "react-dom";
 import { ComponentPropsWithoutRef } from "react";
+import SpinnerContainer from "../Spinner/SpinnerContainer";
 import "./button.styles.scss";
 
 export enum BUTTON_TYPE_CLASS {
@@ -8,12 +12,25 @@ export enum BUTTON_TYPE_CLASS {
 
 interface CustomButtonInterface extends ComponentPropsWithoutRef<"button"> {
 	buttonType?: BUTTON_TYPE_CLASS;
+	hasLoadingState?: boolean;
 }
 
-function Button({ children, buttonType, ...props }: CustomButtonInterface) {
+function Button({
+	children,
+	buttonType,
+	hasLoadingState,
+	...props
+}: CustomButtonInterface) {
+	const { pending } = useFormStatus();
+	const isLoading = hasLoadingState && pending;
+
 	return (
-		<button className={`button-container ${buttonType}`} {...props}>
-			{children}
+		<button
+			className={`button-container ${buttonType}`}
+			disabled={isLoading}
+			{...props}
+		>
+			{isLoading ? <SpinnerContainer /> : children}
 		</button>
 	);
 }

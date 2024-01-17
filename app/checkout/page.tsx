@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import { useCartStore } from "@/stores/cart";
 import CheckoutItem from "@/components/CheckoutItem";
+import PaymentForm from "@/components/PaymentForm";
 import prependCurrency from "@/utils/helpers/prependCurrency";
 import "./checkout.styles.scss";
 
@@ -48,6 +49,7 @@ function Checkout() {
 				/>
 			))}
 			<span className="total">Total: {prependCurrency(total)}</span>
+			<PaymentForm amount={total} />
 		</div>
 	);
 }

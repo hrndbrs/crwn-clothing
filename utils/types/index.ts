@@ -13,6 +13,7 @@ export type CartStore = {
 	setIsOpen?: () => void;
 	addItemToCart?: (product: Product) => void;
 	removeItemFromCart?: (id: string, all?: boolean) => void;
+	clearCart?: () => void;
 };
 
 export type AuthStore<T> = {

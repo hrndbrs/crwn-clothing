@@ -9,9 +9,8 @@ export async function GET() {
 			{ status: 200 }
 		);
 	} catch (error) {
-		console.log(error, 12);
 		return NextResponse.json(
-			{ message: "failed to load categories" },
+			{ message: "failed to load categories", error },
 			{ status: 500 }
 		);
 	}

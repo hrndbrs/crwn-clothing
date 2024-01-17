@@ -12,9 +12,8 @@ export async function GET(req: NextRequest) {
 			{ status: 200 }
 		);
 	} catch (error) {
-		console.log(error, 12);
 		return NextResponse.json(
-			{ message: "failed to load products" },
+			{ message: "failed to load products", error },
 			{ status: 500 }
 		);
 	}
