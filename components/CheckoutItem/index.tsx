@@ -15,15 +15,15 @@ function CheckoutItem({
 	const { id, name, imageUrl, price, quantity } = checkoutItem;
 
 	function clearItem() {
-		removeItemFromCart(id, true);
+		removeItemFromCart!(id, true);
 	}
 
 	function decreeaseItemQuantity() {
-		removeItemFromCart(id);
+		removeItemFromCart!(id);
 	}
 
 	function increeaseItemQuantity() {
-		addItemToCart(checkoutItem);
+		addItemToCart!(checkoutItem);
 	}
 
 	return (

@@ -16,7 +16,7 @@ async function logGoogleUser() {
 	}
 }
 
-export async function signInWithEmailAndPassword(formData: FormData) {
+async function signInWithEmailAndPassword(formData: FormData) {
 	const form = Object.fromEntries(formData.entries());
 	try {
 		const { email, password } = userSignInSchema.parse(form);
@@ -29,7 +29,7 @@ export async function signInWithEmailAndPassword(formData: FormData) {
 
 function SignInForm() {
 	return (
-		<div className="sign-up-container">
+		<div className="sign-in-container">
 			<h2>Already have an account?</h2>
 			<span>Sign in with your email and password</span>
 			<form action={signInWithEmailAndPassword}>

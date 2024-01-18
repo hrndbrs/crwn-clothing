@@ -13,7 +13,7 @@ function CategoryPreview({
 	products: Product[];
 }) {
 	return (
-		<>
+		<Suspense fallback={<Spinner />}>
 			<h2>
 				<span className="title">
 					<Link href={`/shop/${title.toLowerCase()}`}>
@@ -21,14 +21,12 @@ function CategoryPreview({
 					</Link>
 				</span>
 			</h2>
-			<Suspense fallback={<Spinner />}>
-				<div className="preview">
-					{products.slice(0, 4).map((product) => (
-						<ProductCard key={product.id} product={product} />
-					))}
-				</div>
-			</Suspense>
-		</>
+			<div className="preview">
+				{products.slice(0, 4).map((product) => (
+					<ProductCard key={product.id} product={product} />
+				))}
+			</div>
+		</Suspense>
 	);
 }
 
